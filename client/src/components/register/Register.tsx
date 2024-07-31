@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./Register.css"
 
 export default function Register() {
@@ -30,7 +31,7 @@ export default function Register() {
                     </div>
                     <button type="submit">Register</button>
                     <p className="message">
-                        Already registered? <a href="#">Login</a>
+                        Already registered? <Link to="/login">Login</Link>
                     </p>
                 </form>
             </div>

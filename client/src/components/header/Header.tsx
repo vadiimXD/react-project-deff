@@ -8,7 +8,7 @@ export default function Header() {
             <header>
 
                 <Link id="logo" to="/"
-                ><img id="logo-img" src="./images/logo.png" alt=""
+                ><img id="logo-img" src="https://cdn-icons-png.flaticon.com/512/1138/1138598.png" alt="no img"
                     /></Link>
 
                 <nav>
