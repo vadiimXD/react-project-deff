@@ -41,13 +41,13 @@ exports.loginUser = async (body) => {
     const user = await this.getUser(body.email)
 
     if (!user) {
-        throw new Error("invalid username or password")
+        throw new Error("invalid email or password")
     }
 
     const isValid = await this.checkPassword(body.password, user.password)
 
     if (!isValid) {
-        throw new Error("invalid username or password")
+        throw new Error("invalid email or password")
     }
 
     const token = await this.createToken(user._id);
@@ -57,6 +57,7 @@ exports.loginUser = async (body) => {
         email: user.email
     }
 }
+
 exports.updateProfile = (userId, body) => { return User.findByIdAndUpdate(userId, body) }
 
 exports.addToCart = async (userId, phoneId) => {

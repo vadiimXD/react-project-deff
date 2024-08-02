@@ -1,3 +1,3 @@
 module.exports = {
-    SECRET: "777"
+    SECRET: "1337"
 }
