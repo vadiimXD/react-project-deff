@@ -1,33 +1,87 @@
+import { useState } from "react"
 import "./Create.css"
+import { changeHandler, createFormSubmitHandler } from "../../utils/formUtils"
 
 export default function Create() {
+
+    let [createFormValues, setCreateForm] = useState({
+        brand: "",
+        model: "",
+        imageUrl: "",
+        release: "",
+        price: "",
+    })
+
     return (
         <section id="create">
             <div className="form">
-                <h2>Add item</h2>
-                <form className="create-form">
-                    <input type="text" name="brand" id="shoe-brand" placeholder="Brand" />
-                    <input type="text" name="model" id="shoe-model" placeholder="Model" />
-                    <input
-                        type="text"
-                        name="imageUrl"
-                        id="shoe-img"
-                        placeholder="Image url"
-                    />
-                    <input
-                        type="text"
-                        name="release"
-                        id="shoe-release"
-                        placeholder="Release date"
-                    />
-                    <input
-                        type="text"
-                        name="designer"
-                        id="shoe-designer"
-                        placeholder="Designer"
-                    />
-                    <input type="text" name="value" id="shoe-value" placeholder="Value" />
-                    <button type="submit">post</button>
+                <h2>Add shoes</h2>
+                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues)}>
+                    <div>
+                        <label htmlFor="shoe-brand">Shoe brand:</label>
+                        <input
+                            type="text"
+                            name="brand"
+                            id="shoe-brand"
+                            placeholder="Nike ..."
+                            value={createFormValues.brand}
+                            onChange={(e) => changeHandler(e, setCreateForm)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="shoe-model">Shoe model:</label>
+                        <input
+                            type="text"
+                            name="model"
+                            id="shoe-model"
+                            placeholder="Air Force ..."
+                            value={createFormValues.model}
+                            onChange={(e) => changeHandler(e, setCreateForm)}
+
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="shoe-img">Shoe image:</label>
+                        <input
+                            type="text"
+                            name="imageUrl"
+                            id="shoe-img"
+                            placeholder="https://media.wired.com/photos/63728604691ed08cc4b98976/master/pass/Nike-Swoosh-News-Gear.jpg"
+                            value={createFormValues.imageUrl}
+                            onChange={(e) => changeHandler(e, setCreateForm)}
+
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="shoe-release">Release date:</label>
+                        <input
+                            type="date"
+                            name="release"
+                            id="shoe-release"
+                            placeholder="08/02/2024 ..."
+                            value={createFormValues.release}
+                            onChange={(e) => changeHandler(e, setCreateForm)}
+
+                        />
+                    </div>
+
+
+
+                    <div>
+                        <label htmlFor="shoe-price">Shoe price:</label>
+                        <input
+                            type="number"
+                            name="price"
+                            id="shoe-price"
+                            placeholder="300$ ..."
+                            value={createFormValues.price}
+                            onChange={(e) => changeHandler(e, setCreateForm)}
+
+                        />
+                    </div>
+                    <button type="submit">ADD</button>
                 </form>
             </div>
         </section>

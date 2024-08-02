@@ -1,3 +1,4 @@
+import { CreateType } from "../types/CreateType";
 import { LoginType } from "../types/LoginType";
 import { RegisterType } from "../types/RegisterType";
 import requester from "./requester";
@@ -34,7 +35,7 @@ async function loginFormSubmitHandler(e: any, values: LoginType) {
     console.log(values.password)
 
     try {
-        const response = await requester("http://localhost:1337/login", "POST", true, { email: values.email, password: values.password})
+        const response = await requester("http://localhost:1337/login", "POST", true, { email: values.email, password: values.password })
 
         const result = await response.json()
 
@@ -53,9 +54,38 @@ function changeHandler(e: any, setFormValues: any) {
     }));
 };
 
+async function createFormSubmitHandler(e: any, values: CreateType) {
+    e.preventDefault();
+    console.log(values);
+    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
+        return alert("NO!");
+    }
+
+    if (values.brand.length < 3) {
+        return alert("noo");
+    }
+
+    if (values.model.length < 2) {
+        return alert("no");
+    }
+
+
+    if (Number(values.price) < 0) {
+        return alert("no!");
+    }
+
+    try {
+        const response = await requester("http://localhost:1337/create", "POST", true, values)
+        const result = await response.json();
+        console.log(result)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 export {
     registerFormSubmitHandler,
     loginFormSubmitHandler,
+    createFormSubmitHandler,
     changeHandler
 }

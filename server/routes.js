@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
 const authController = require("./controllers/authController")
-const sneakersController = require("./controllers/sneakersController")
+const shoeController = require("./controllers/shoeController")
 
 router.use(authController)
-router.use(sneakersController)
+router.use(shoeController)
 
 module.exports = router
