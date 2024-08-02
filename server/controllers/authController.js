@@ -3,9 +3,13 @@ const authService = require("../services/authService")
 
 
 router.post("/register", async (req, res) => {
+    console.log("HELLO")
+    console.log(req.body)
     try {
         const body = await authService.registerUser(req.body.email, req.body.password, req.body)
+        console.log(body)
         res.send(body)
+   
     } catch (error) {
 
         res.send(false)

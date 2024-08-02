@@ -6,7 +6,7 @@ const Phone = require("../models/Phone");
 
 exports.registerUser = async (email, password, body) => {
 
-    if (!body.email || !body.password || !body.repassword || !body.username) {
+    if (!body.email || !body.password || !body.repassword) {
         throw new Error("invalid values")
     }
 
@@ -17,7 +17,7 @@ exports.registerUser = async (email, password, body) => {
     const salt = await bcrypt.genSalt();
     const saltedHash = await bcrypt.hash(password, salt);
 
-    await User.create({ email, password: saltedHash, username: body.username, profileImg: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" })
+    await User.create({ email, password: saltedHash })
 
     const user = await this.getUser(email);
     const token = await this.createToken(user._id);
