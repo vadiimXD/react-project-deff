@@ -22,7 +22,6 @@ const ShoeSchema = new mongoose.Schema({
     release: {
         type: String,
         required: true,
-    
     },
     price: {
         type: Number,

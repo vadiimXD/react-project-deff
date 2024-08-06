@@ -57,6 +57,7 @@ function changeHandler(e: any, setFormValues: any) {
 async function createFormSubmitHandler(e: any, values: CreateType) {
     e.preventDefault();
     console.log(values);
+    // console.log({ ...values, owner: "dd", test: "ddd" })
     if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
         return alert("NO!");
     }

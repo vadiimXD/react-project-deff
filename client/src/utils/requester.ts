@@ -1,4 +1,4 @@
-export default async function requester(url: string, method: string, headers: boolean, body: {}) {
+export default async function requester(url: string, method: string, headers?: boolean, body?: {}) {
     let options: any = {}
 
     if (method == "GET") {

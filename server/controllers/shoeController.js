@@ -17,7 +17,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/catalog", async (req, res) => {
     try {
-        const phones = await phonesService.getAllPhones().lean().populate("owner")
+        const phones = await shoeService.getAllShoes()
         res.json(phones)
     } catch (error) {
         res.send(false)

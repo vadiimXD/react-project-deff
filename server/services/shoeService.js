@@ -8,7 +8,7 @@ exports.createOffer = async (body) => {
     return product
 }
 
-exports.getAllPhones = () => { return Shoe.find() }
+exports.getAllShoes = () => { return Shoe.find() }
 
 exports.updateProduct = (productId, body) => { return Shoe.findByIdAndUpdate(productId, body, { runValidators: true }) }
 
