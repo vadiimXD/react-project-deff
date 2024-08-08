@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import "./Register.css"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { registerFormSubmitHandler, changeHandler } from "../../utils/formUtils";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Register() {
 
@@ -11,15 +12,17 @@ export default function Register() {
         repassword: "",
     });
 
+    const context = useContext(AuthContext)
+
     return (
         <section id="register">
             <div className="form">
                 <h2>Register</h2>
-                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues)}>
+                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState)}>
                     <div>
                         <label htmlFor="register-email">Email:</label>
                         <input type="text" name="email" id="register-email" placeholder="vladii@abv.bg" value={registerFormValues.email}
-                           onChange={(e) => changeHandler(e, setRegisterFormValues)} />
+                            onChange={(e) => changeHandler(e, setRegisterFormValues)} />
                     </div>
                     <div>
                         <label htmlFor="register-password">Password: </label>

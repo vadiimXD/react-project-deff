@@ -1,8 +1,21 @@
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-
-
+import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Header() {
+    const context = useContext(AuthContext)
+    const [isLogged, setIsLogged] = useState({})
+    useEffect(() => {
+        const authStringify: any = localStorage.getItem("auth")
+        const auth = JSON.parse(authStringify)
+        if (auth != "false") {
+            return setIsLogged(auth)
+        }
+
+        setIsLogged({})
+
+    }, [context])
+
     return (
         <>
             <header>
@@ -17,16 +30,21 @@ export default function Header() {
                         <Link to="/search">Search</Link>
                     </div>
 
-                    <div className="user">
-                        <Link to="/create">Add Pair</Link>
-                        <Link to="/logout">Logout</Link>
-                    </div>
+                    {!!isLogged ? (
+                        <div className="user">
+                            <Link to="/create">Add Pair</Link>
+                            <a onClick={() => {
+                                context?.setState(false)
+                                localStorage.clear()
+                            }}>Logout</a>
+                        </div>
+                    ) : (
+                        <div className="guest">
+                            <Link to="/login">Login</Link>
+                            <Link to="/register">Register</Link>
+                        </div>
+                    )}
 
-
-                    <div className="guest">
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </div>
                 </nav>
             </header>
         </>

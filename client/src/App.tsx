@@ -8,10 +8,22 @@ import Login from './components/login/Login'
 import Dashboard from './components/dashboard/Dashboard'
 import Create from './components/create/Create'
 import Search from './components/search/Search'
+import Details from './components/details/Details'
+import { useState } from 'react'
+import { AuthContext } from './contexts/AuthContext'
+import { AuthType } from './types/AuthType'
 export default function App() {
+  const [authState, setAuthState] = useState<any>({})
 
+  const contextData:AuthType  | undefined= {
+    userId: authState.userId,
+    token: authState.token,
+    email: authState.email,
+    setState: setAuthState
+  }
   return (
-    <>
+    <AuthContext.Provider value={contextData}>
+
       <Header />
       <Routes>
         <Route path='/' element={<MainContent />}></Route>
@@ -20,11 +32,11 @@ export default function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/create' element={<Create />}></Route>
         <Route path='/search' element={<Search />}></Route>
+        <Route path='/details/:shoeId' element={<Details />}></Route>
       </Routes>
       <Footer />
 
-    </>
-
+    </AuthContext.Provider>
   )
 }
 

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default function Card(props: any) {
-console.log(props.shoe)
     return (
         <li className="card">
             <img src={props.shoe.imageUrl} alt="no img" />
@@ -17,7 +16,7 @@ console.log(props.shoe)
                 <strong>Value:</strong>
                 <span className="value">{props.shoe.price}$</span>
             </p>
-            <a className="details-btn" href="">Details</a>
+            <Link to={`/details/${props.shoe._id}`} className="details-btn" >Details</Link>
         </li>
     );
 }

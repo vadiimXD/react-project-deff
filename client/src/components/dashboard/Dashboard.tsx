@@ -10,12 +10,18 @@ export default function Dashboard() {
 
     useEffect(() => {
         (async () => {
-            const response = await requester("http://localhost:1337/catalog", "GET")
-            const result: ShoeType[] = await response.json();
+            try {
 
-            setShoes(result)
+                const response = await requester("http://localhost:1337/catalog", "GET")
+                const result: ShoeType[] = await response.json();
+
+                setShoes(result)
+            } catch (error) {
+                alert(error)
+            }
         })()
     }, [])
+
     return (
         <section id="dashboard">
             <h2>Collectibles</h2>

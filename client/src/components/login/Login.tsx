@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom"
 import "./Login.css"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { changeHandler, loginFormSubmitHandler } from "../../utils/formUtils"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Login() {
     let [loginFormValues, setLoginFormValues] = useState({
@@ -9,11 +10,13 @@ export default function Login() {
         password: ""
     })
 
+    const context = useContext(AuthContext)
+    
     return (
         <section id="login">
             <div className="form">
                 <h2>Login</h2>
-                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues)}>
+                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState)}>
                     <div>
                         <label htmlFor="email">Email:</label>
                         <input
