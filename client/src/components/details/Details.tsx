@@ -1,28 +1,45 @@
+import { useParams } from "react-router-dom";
 import "./Details.css"
+import { useEffect, useState } from "react";
+import requester from "../../utils/requester";
+import { ShoeType } from "../../types/ShoeType";
 
 export default function Details() {
+    const [shoe, setShoe] = useState<ShoeType>()
+    const params = useParams();
+
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await requester(`http://localhost:1337/details/${params.shoeId}`, "GET")
+                const result = await response.json();
+                setShoe(result)
+            } catch (error) {
+                alert(error)
+            }
+        })()
+    }, [])
+
     return (
         <section id="details">
             <div id="details-wrapper">
                 <p id="details-title">Shoe Details</p>
                 <div id="img-wrapper">
-                    <img src="./images/travis.jpg" alt="example1" />
+                    <img src={shoe?.imageUrl} alt="no img" />
                 </div>
                 <div id="info-wrapper">
                     <p>
-                        Brand: <span id="details-brand">Air Jordan</span>
+                        Brand: <span id="details-brand">{shoe?.brand}</span>
                     </p>
                     <p>
-                        Model: <span id="details-model">1 Retro High TRAVIS SCOTT</span>
+                        Model: <span id="details-model">{shoe?.model}</span>
                     </p>
                     <p>
-                        Release date: <span id="details-release">2019</span>
+                        Release date: <span id="details-release">{shoe?.release}</span>
                     </p>
                     <p>
-                        Designer: <span id="details-designer">Travis Scott</span>
-                    </p>
-                    <p>
-                        Value: <span id="details-value">2000</span>
+                        Price: <span id="details-value">{shoe?.price}$</span>
                     </p>
                 </div>
                 <div id="action-buttons">

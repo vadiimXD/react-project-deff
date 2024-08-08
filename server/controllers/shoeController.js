@@ -17,16 +17,18 @@ router.post("/create", async (req, res) => {
 
 router.get("/catalog", async (req, res) => {
     try {
-        const phones = await shoeService.getAllShoes()
-        res.json(phones)
+        const shoes = await shoeService.getAllShoes()
+        res.json(shoes)
     } catch (error) {
         res.send(false)
     }
 })
 
-router.get("/details/:productId", async (req, res) => {
+router.get("/details/:shoeId", async (req, res) => {
     try {
-        const product = await phonesService.getOneProduct(req.params.productId).lean().populate("owner").populate("boughtFrom");
+        const product = await shoeService.getOneProduct(req.params.shoeId);
+
+        console.log(product)
         res.json(product)
     } catch (error) {
         res.send(false)
