@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { CreateType } from "../types/CreateType";
 import { LoginType } from "../types/LoginType";
 import { RegisterType } from "../types/RegisterType";
 import requester from "./requester";
+import { AuthType } from "../types/AuthType";
 
 async function registerFormSubmitHandler(e: any, values: RegisterType, setState: any) {
     e.preventDefault()
@@ -56,9 +57,37 @@ function changeHandler(e: any, setFormValues: any) {
 
 async function createFormSubmitHandler(e: any, values: CreateType) {
     e.preventDefault();
-    console.log(values);
-    const navigate = useNavigate()
-    // console.log({ ...values, owner: "dd", test: "ddd" })
+    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
+        return alert("NO!");
+    }
+
+    if (values.brand.length < 3) {
+        return alert("noo");
+    }
+
+    if (values.model.length < 2) {
+        return alert("no");
+    }
+
+
+    if (Number(values.price) < 0) {
+        return alert("no!");
+    }
+    const stringAuth: any = localStorage.getItem("auth");
+    const auth: AuthType = JSON.parse(stringAuth)
+    values.owner = auth.userId
+
+    try {
+        const response = await requester("http://localhost:1337/create", "POST", true, values)
+        const result = await response.json();
+        console.log(result)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function editFormSubmitHandler(e: any, values: CreateType) {
+    e.preventDefault();
     if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
         return alert("NO!");
     }
@@ -77,18 +106,19 @@ async function createFormSubmitHandler(e: any, values: CreateType) {
     }
 
     try {
-        const response = await requester("http://localhost:1337/create", "POST", true, values)
+        const response = await requester("http://localhost:1337/edit", "POST", true, values)
         const result = await response.json();
-        navigate("/")
         console.log(result)
     } catch (error) {
-        console.log(error)
+        alert(error)
     }
 }
+
 
 export {
     registerFormSubmitHandler,
     loginFormSubmitHandler,
     createFormSubmitHandler,
+    editFormSubmitHandler,
     changeHandler
 }

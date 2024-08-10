@@ -1,10 +1,14 @@
-import { useState } from "react"
-import "./Create.css"
-import { changeHandler, createFormSubmitHandler } from "../../utils/formUtils"
+import { useEffect, useState } from "react";
+import "./Edit.css"
+import requester from "../../utils/requester";
+import { useParams } from "react-router-dom";
+import { changeHandler, editFormSubmitHandler } from "../../utils/formUtils";
 
-export default function Create() {
+export default function Edit() {
 
-    let [createFormValues, setCreateForm] = useState({
+    const params = useParams()
+
+    const [editFormValues, setEditForm] = useState({
         brand: "",
         model: "",
         imageUrl: "",
@@ -13,11 +17,25 @@ export default function Create() {
         owner: ""
     })
 
+
+    useEffect(() => {
+        (async () => {
+            try {
+
+                const response = await requester(`http://localhost:1337/details/${params.shoeId}`, "GET")
+                const result = await response.json();
+                setEditForm(result)
+            } catch (error) {
+                alert(error)
+            }
+        })()
+    }, [])
+
     return (
-        <section id="create">
+        <section id="edit">
             <div className="form">
-                <h2>Add shoes</h2>
-                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues)}>
+                <h2>Edit shoes</h2>
+                <form className="edit-form" onSubmit={(e) => editFormSubmitHandler(e, editFormValues)}>
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
                         <input
@@ -25,8 +43,8 @@ export default function Create() {
                             name="brand"
                             id="shoe-brand"
                             placeholder="Nike ..."
-                            value={createFormValues.brand}
-                            onChange={(e) => changeHandler(e, setCreateForm)}
+                            value={editFormValues.brand}
+                            onChange={(e) => changeHandler(e, setEditForm)}
                         />
                     </div>
                     <div>
@@ -36,8 +54,8 @@ export default function Create() {
                             name="model"
                             id="shoe-model"
                             placeholder="Air Force ..."
-                            value={createFormValues.model}
-                            onChange={(e) => changeHandler(e, setCreateForm)}
+                            value={editFormValues.model}
+                            onChange={(e) => changeHandler(e, setEditForm)}
 
                         />
                     </div>
@@ -49,8 +67,8 @@ export default function Create() {
                             name="imageUrl"
                             id="shoe-img"
                             placeholder="https://media.wired.com/photos/63728604691ed08cc4b98976/master/pass/Nike-Swoosh-News-Gear.jpg"
-                            value={createFormValues.imageUrl}
-                            onChange={(e) => changeHandler(e, setCreateForm)}
+                            value={editFormValues.imageUrl}
+                            onChange={(e) => changeHandler(e, setEditForm)}
 
                         />
                     </div>
@@ -62,8 +80,8 @@ export default function Create() {
                             name="release"
                             id="shoe-release"
                             placeholder="08/02/2024 ..."
-                            value={createFormValues.release}
-                            onChange={(e) => changeHandler(e, setCreateForm)}
+                            value={editFormValues.release}
+                            onChange={(e) => changeHandler(e, setEditForm)}
 
                         />
                     </div>
@@ -77,15 +95,14 @@ export default function Create() {
                             name="price"
                             id="shoe-price"
                             placeholder="300$ ..."
-                            value={createFormValues.price}
-                            onChange={(e) => changeHandler(e, setCreateForm)}
+                            value={editFormValues.price}
+                            onChange={(e) => changeHandler(e, setEditForm)}
 
                         />
                     </div>
-                    <button type="submit">ADD</button>
+                    <button type="submit">Edit</button>
                 </form>
             </div>
         </section>
-
-    )
+    );
 }

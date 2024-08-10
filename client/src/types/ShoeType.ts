@@ -6,4 +6,5 @@ export type ShoeType = {
     release: string
     price: number
     __v: number
+    owner: string
 }

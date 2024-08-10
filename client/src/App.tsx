@@ -9,21 +9,14 @@ import Dashboard from './components/dashboard/Dashboard'
 import Create from './components/create/Create'
 import Search from './components/search/Search'
 import Details from './components/details/Details'
-import { useState } from 'react'
-import { AuthContext } from './contexts/AuthContext'
-import { AuthType } from './types/AuthType'
+import { AuthContextProvider } from './contexts/AuthContext'
+import Edit from './components/edit/Edit'
+
+
 export default function App() {
-  const [authState, setAuthState] = useState<any>({})
 
-  const contextData:AuthType  | undefined= {
-    userId: authState.userId,
-    token: authState.token,
-    email: authState.email,
-    setState: setAuthState
-  }
   return (
-    <AuthContext.Provider value={contextData}>
-
+    <AuthContextProvider>
       <Header />
       <Routes>
         <Route path='/' element={<MainContent />}></Route>
@@ -33,10 +26,10 @@ export default function App() {
         <Route path='/create' element={<Create />}></Route>
         <Route path='/search' element={<Search />}></Route>
         <Route path='/details/:shoeId' element={<Details />}></Route>
+        <Route path='/edit/:shoeId' element={<Edit />}></Route>
       </Routes>
       <Footer />
-
-    </AuthContext.Provider>
+    </AuthContextProvider>
   )
 }
 

@@ -27,8 +27,6 @@ router.get("/catalog", async (req, res) => {
 router.get("/details/:shoeId", async (req, res) => {
     try {
         const product = await shoeService.getOneProduct(req.params.shoeId);
-
-        console.log(product)
         res.json(product)
     } catch (error) {
         res.send(false)
@@ -46,7 +44,7 @@ router.post("/buy", async (req, res) => {
 
 router.post("/edit", async (req, res) => {
     try {
-        await phonesService.updateProduct(req.body.id, req.body.body)
+        await shoeService.updateProduct(req.body._id, req.body)
         res.send({ edited: true })
     } catch (error) {
         res.send(false)

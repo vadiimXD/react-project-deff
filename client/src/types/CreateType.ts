@@ -4,4 +4,5 @@ export type CreateType = {
     imageUrl: string
     release: string
     price: number | string
+    owner:string
 }

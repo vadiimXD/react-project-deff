@@ -1,13 +1,15 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Details.css"
 import { useEffect, useState } from "react";
 import requester from "../../utils/requester";
 import { ShoeType } from "../../types/ShoeType";
+import { AuthType } from "../../types/AuthType";
 
 export default function Details() {
     const [shoe, setShoe] = useState<ShoeType>()
     const params = useParams();
-
+    const stringAuth: any = localStorage.getItem("auth");
+    const auth: AuthType = JSON.parse(stringAuth)
 
     useEffect(() => {
         (async () => {
@@ -42,14 +44,15 @@ export default function Details() {
                         Price: <span id="details-value">{shoe?.price}$</span>
                     </p>
                 </div>
-                <div id="action-buttons">
-                    <a href="" id="edit-btn">
+                {auth?.userId == shoe?.owner ? (<div id="action-buttons">
+                    <Link to={`/edit/${shoe._id}`} id="edit-btn">
                         Edit
-                    </a>
-                    <a href="" id="delete-btn">
+                    </Link>
+                    <Link to={`/delete/${shoe._id}`} id="delete-btn">
                         Delete
-                    </a>
-                </div>
+                    </Link>
+                </div>) : <></>}
+
             </div>
         </section>
 
