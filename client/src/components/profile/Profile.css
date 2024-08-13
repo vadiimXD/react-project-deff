@@ -1,0 +1,71 @@
+
+.profile-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+
+    margin-top: 5em;
+}
+.profile-container img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+.profile-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+.profile-container p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+}
+.social-links a {
+    text-decoration: none;
+    color: #555;
+    margin: 0 10px;
+    font-size: 20px;
+}
+.social-links a:hover {
+    color: #000;
+}
+.shoes-section {
+    margin-top: 30px;
+}
+.shoes-section h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+}
+.shoe {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.shoe img {
+    border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+.shoe .shoe-info {
+    text-align: left;
+}
+.shoe .shoe-info h3 {
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+}
+.shoe .shoe-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #777;
+}

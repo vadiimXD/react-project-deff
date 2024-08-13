@@ -26,6 +26,16 @@ router.get("/catalog", async (req, res) => {
     }
 })
 
+router.get("/last", async (req, res) => {
+    try {
+        const shoes = await shoeService.getLastShoes()
+        res.json(shoes)
+    } catch (error) {
+        res.send(error.message)
+
+    }
+})
+
 router.get("/details/:shoeId", async (req, res) => {
     try {
         const product = await shoeService.getOneProduct(req.params.shoeId);

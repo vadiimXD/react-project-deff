@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    addedShoes: [{
+        type: mongoose.Types.ObjectId,
+        ref: "Shoe"
+    }]
 })
 
 const User = mongoose.model("User", userSchema)

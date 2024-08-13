@@ -8,7 +8,7 @@ router.post("/register", async (req, res) => {
         const body = await authService.registerUser(req.body.email, req.body.password, req.body)
         console.log(body)
         res.send(body)
-   
+
     } catch (error) {
 
         res.send(error.message)
@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/user/:userId", async (req, res) => {
     try {
-        const user = await authService.getUserById(req.params.userId).populate("shoppingCart").populate("createdOffers").populate("boughtList");
+        const user = await authService.getUserById(req.params.userId).populate("addedShoes")
         res.json(user)
     } catch (error) {
         res.send(error.message)

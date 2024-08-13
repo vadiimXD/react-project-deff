@@ -11,6 +11,7 @@ import Search from './components/search/Search'
 import Details from './components/details/Details'
 import { AuthContextProvider } from './contexts/AuthContext'
 import Edit from './components/edit/Edit'
+import Profile from './components/profile/Profile'
 
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/create' element={<Create />}></Route>
         <Route path='/search' element={<Search />}></Route>
+        <Route path='/profile' element={<Profile />}></Route>
         <Route path='/details/:shoeId' element={<Details />}></Route>
         <Route path='/edit/:shoeId' element={<Edit />}></Route>
       </Routes>
