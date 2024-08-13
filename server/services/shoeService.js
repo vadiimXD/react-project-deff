@@ -23,19 +23,15 @@ exports.buyProduct = async (productId, userId) => {
 
 exports.deleteProduct = (productId) => { return Shoe.findByIdAndDelete(productId) }
 
-exports.searchProducts = async (name, type) => {
-    const query = {}
-    if (name) {
-        const nameRegex = new RegExp('^' + name, 'i');
-        query.name = { $regex: nameRegex }
+exports.searchProducts = async (brand) => {
+    const query = {};
+
+    if (brand) {
+        const brandRegex = new RegExp('^' + brand, 'i');
+        query.brand = { $regex: brandRegex }
     }
 
-    if (type) {
-        const typeRegex = new RegExp('^' + type, 'i');
-        query.type = { $regex: typeRegex }
-    }
-
-    if (!name && !type) {
+    if (!brand) {
         return undefined
     }
 

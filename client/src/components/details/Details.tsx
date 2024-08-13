@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import requester from "../../utils/requester";
 import { ShoeType } from "../../types/ShoeType";
 import { AuthType } from "../../types/AuthType";
+import { deleteHandler } from "../../utils/formUtils";
 
 export default function Details() {
     const [shoe, setShoe] = useState<ShoeType>()
@@ -48,9 +49,9 @@ export default function Details() {
                     <Link to={`/edit/${shoe._id}`} id="edit-btn">
                         Edit
                     </Link>
-                    <Link to={`/delete/${shoe._id}`} id="delete-btn">
+                    <a  onClick={()=>deleteHandler(shoe._id)} id="delete-btn">
                         Delete
-                    </Link>
+                    </a>
                 </div>) : <></>}
 
             </div>

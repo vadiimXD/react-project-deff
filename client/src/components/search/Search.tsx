@@ -1,44 +1,48 @@
+import { useEffect, useState } from "react"
 import "./Search.css"
+import { changeHandler, searchSubmitHandler } from "../../utils/formUtils"
+import Card from "../card/Card"
+import { ShoeType } from "../../types/ShoeType"
+import requester from "../../utils/requester"
 
 export default function Search() {
+    const [shoes, setShoes] = useState<ShoeType[] | []>([])
+    const [brand, setBrand] = useState({ brand: "" })
+
+    useEffect(() => {
+        (async () => {
+            try {
+
+                const response = await requester("http://localhost:1337/catalog", "GET")
+                const result: ShoeType[] = await response.json();
+
+                setShoes(result)
+            } catch (error) {
+                alert(error)
+            }
+        })()
+    }, [])
+    
     return (
         <section id="search">
             <h2>Search by Brand</h2>
-            <form className="search-wrapper cf">
+            <form className="search-wrapper cf" onSubmit={(e) => searchSubmitHandler(e, brand.brand, setShoes)}>
                 <input
                     id="#search-input"
                     type="text"
-                    name="search"
-                    placeholder="Search here..."
+                    name="brand"
+                    placeholder="Nike..."
                     required={true}
+                    value={brand.brand}
+                    onChange={(e) => changeHandler(e, setBrand)}
                 />
                 <button type="submit">Search</button>
             </form>
             <h3>Results:</h3>
             <div id="search-container">
-                <ul className="card-wrapper">
-                    {/* Display a li with information about every post (if any)*/}
-                    <li className="card">
-                        <img src="./images/travis.jpg" alt="travis" />
-                        <p>
-                            <strong>Brand: </strong>
-                            <span className="brand">Air Jordan</span>
-                        </p>
-                        <p>
-                            <strong>Model: </strong>
-                            <span className="model">1 Retro High TRAVIS SCOTT</span>
-                        </p>
-                        <p>
-                            <strong>Value:</strong>
-                            <span className="value">2000</span>$
-                        </p>
-                        <a className="details-btn" href="">
-                            Details
-                        </a>
-                    </li>
-                </ul>
-                {/* Display an h2 if there are no posts */}
-                {/* <h2>There are no results found.</h2> */}
+                {shoes.length != 0 ? (<ul className="card-wrapper">
+                    {shoes.map(shoe => <Card key={shoe._id} shoe={shoe} />)}
+                </ul>) : (<h2>There are no results found.</h2>)}
             </div>
         </section>
 

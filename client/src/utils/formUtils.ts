@@ -114,11 +114,34 @@ async function editFormSubmitHandler(e: any, values: CreateType) {
     }
 }
 
+async function searchSubmitHandler(e: any, brand: string, setShoes: Function) {
+    e.preventDefault()
+    console.log(brand)
+    try {
+        const response = await requester(`http://localhost:1337/search`, "POST", true, { brand, })
+        const result = await response.json()
+        setShoes(result)
+    } catch (error) {
+        alert(error)
+    }
+}
+
+async function deleteHandler(shoeId: any) {
+    try {
+        const response = await requester(`http://localhost:1337/delete/${shoeId}`, "DELETE")
+        const result = await response.json()
+        console.log(result)
+    } catch (error) {
+        alert(error)
+    }
+}
 
 export {
     registerFormSubmitHandler,
     loginFormSubmitHandler,
     createFormSubmitHandler,
     editFormSubmitHandler,
+    searchSubmitHandler,
+    deleteHandler,
     changeHandler
 }

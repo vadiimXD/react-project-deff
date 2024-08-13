@@ -10,7 +10,8 @@ router.post("/create", async (req, res) => {
         await shoeService.createOffer(req.body)
         res.send({ created: true })
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
@@ -20,7 +21,8 @@ router.get("/catalog", async (req, res) => {
         const shoes = await shoeService.getAllShoes()
         res.json(shoes)
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
@@ -29,7 +31,8 @@ router.get("/details/:shoeId", async (req, res) => {
         const product = await shoeService.getOneProduct(req.params.shoeId);
         res.json(product)
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
@@ -38,7 +41,8 @@ router.post("/buy", async (req, res) => {
         await phonesService.buyProduct(req.body.phoneId, req.body.userId)
         res.send(true)
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
@@ -47,27 +51,29 @@ router.post("/edit", async (req, res) => {
         await shoeService.updateProduct(req.body._id, req.body)
         res.send({ edited: true })
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
-router.delete("/delete/:phoneId", async (req, res) => {
+router.delete("/delete/:shoeId", async (req, res) => {
     try {
-        await phonesService.deleteProduct(req.params.phoneId)
+        await shoeService.deleteProduct(req.params.shoeId)
         res.send({ deleted: true })
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
+
     }
 })
 
 router.post("/search", async (req, res) => {
-
     try {
-        const phones = await phonesService.searchProducts(req.body.name, req.body.type)
-        console.log(phones)
-        res.json(phones)
+        console.log(req.body.brand, "brand")
+        const shoes = await shoeService.searchProducts(req.body.brand)
+        console.log(shoes, "shoes")
+        res.json(shoes)
     } catch (error) {
-        res.send(false)
+        res.send(error.message)
     }
 })
 
