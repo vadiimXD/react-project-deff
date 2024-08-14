@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Edit.css"
 import requester from "../../utils/requester";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { changeHandler, editFormSubmitHandler } from "../../utils/formUtils";
 
 export default function Edit() {
-
+    const navigate = useNavigate()
     const params = useParams()
 
     const [editFormValues, setEditForm] = useState({
@@ -35,7 +35,7 @@ export default function Edit() {
         <section id="edit">
             <div className="form">
                 <h2>Edit shoes</h2>
-                <form className="edit-form" onSubmit={(e) => editFormSubmitHandler(e, editFormValues)}>
+                <form className="edit-form" onSubmit={(e) => editFormSubmitHandler(e, editFormValues,navigate)}>
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
                         <input

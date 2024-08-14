@@ -26,7 +26,7 @@ export default function Card(props: any) {
             <div className={styles.buttons}>
                 <Link to={`/details/${props.shoe._id}`} className="details-btn" >Details</Link>
 
-                {!likes.includes(user.userId)
+                {!likes?.includes(user?.userId)
                     ?
                     <button className="details-btn" onClick={() => addLike(props.shoe._id)} >Like</button>
                     :

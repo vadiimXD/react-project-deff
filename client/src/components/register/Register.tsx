@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Register.css"
 import { useContext, useState } from "react";
 import { registerFormSubmitHandler, changeHandler } from "../../utils/formUtils";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Register() {
+    const navigate = useNavigate()
 
     const [registerFormValues, setRegisterFormValues] = useState({
         email: '',
@@ -18,7 +19,7 @@ export default function Register() {
         <section id="register">
             <div className="form">
                 <h2>Register</h2>
-                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState)}>
+                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState, navigate)}>
                     <div>
                         <label htmlFor="register-email">Email:</label>
                         <input type="text" name="email" id="register-email" placeholder="vladii@abv.bg" value={registerFormValues.email}

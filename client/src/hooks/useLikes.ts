@@ -22,7 +22,6 @@ export function useLikes(initialValue: any, shoeId: string) {
     }, [])
 
     async function addLike(shoeId: string) {
-        console.log("heloo?")
         try {
             const response = await requester("http://localhost:1337/like", "POST", true, { shoeId, userId: user.userId })
             const result = await response.json();
@@ -34,7 +33,6 @@ export function useLikes(initialValue: any, shoeId: string) {
     }
 
     async function removeLike(shoeId: string) {
-        console.log("here")
         try {
             const response = await requester("http://localhost:1337/unlike", "POST", true, { shoeId, userId: user.userId })
             const result = await response.json();

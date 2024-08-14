@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
 import { useContext } from "react"
 import { AuthType } from "../../types/AuthType"
 import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Header() {
+    const navigate = useNavigate()
     const context: AuthType | undefined = useContext(AuthContext)
     const [isLogged, setIsLogged] = useAuth({})
     return (
@@ -23,6 +24,7 @@ export default function Header() {
                             <a onClick={() => {
                                 context?.setState(false)
                                 localStorage.clear()
+                                navigate("/")
                             }}>Logout</a>
                         </div>
                     ) : (

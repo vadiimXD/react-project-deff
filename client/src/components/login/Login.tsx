@@ -1,22 +1,23 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
 import { useContext, useState } from "react"
 import { changeHandler, loginFormSubmitHandler } from "../../utils/formUtils"
 import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Login() {
+    const navigate = useNavigate()
     let [loginFormValues, setLoginFormValues] = useState({
         email: "",
         password: ""
     })
 
     const context = useContext(AuthContext)
-    
+
     return (
         <section id="login">
             <div className="form">
                 <h2>Login</h2>
-                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState)}>
+                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState,navigate)}>
                     <div>
                         <label htmlFor="email">Email:</label>
                         <input

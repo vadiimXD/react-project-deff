@@ -12,6 +12,7 @@ import Details from './components/details/Details'
 import { AuthContextProvider } from './contexts/AuthContext'
 import Edit from './components/edit/Edit'
 import Profile from './components/profile/Profile'
+import AuthGuard from './guards/authGuard'
 
 
 export default function App() {
@@ -24,11 +25,13 @@ export default function App() {
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
-        <Route path='/create' element={<Create />}></Route>
         <Route path='/search' element={<Search />}></Route>
+        <Route element={<AuthGuard />}>
+        <Route path='/create' element={<Create />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='/details/:shoeId' element={<Details />}></Route>
         <Route path='/edit/:shoeId' element={<Edit />}></Route>
+        </Route>
       </Routes>
       <Footer />
     </AuthContextProvider>

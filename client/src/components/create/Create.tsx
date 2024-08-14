@@ -1,9 +1,10 @@
 import { useState } from "react"
 import "./Create.css"
 import { changeHandler, createFormSubmitHandler } from "../../utils/formUtils"
+import { useNavigate } from "react-router-dom"
 
 export default function Create() {
-
+    const navigate = useNavigate()
     let [createFormValues, setCreateForm] = useState({
         brand: "",
         model: "",
@@ -17,7 +18,7 @@ export default function Create() {
         <section id="create">
             <div className="form">
                 <h2>Add shoes</h2>
-                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues)}>
+                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues,navigate)}>
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
                         <input

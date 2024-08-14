@@ -5,7 +5,7 @@ import { RegisterType } from "../types/RegisterType";
 import requester from "./requester";
 import { AuthType } from "../types/AuthType";
 
-async function registerFormSubmitHandler(e: any, values: RegisterType, setState: any) {
+async function registerFormSubmitHandler(e: any, values: RegisterType, setState: any, navigate: Function) {
     e.preventDefault()
     if (!values.email || !values.password || !values.repassword) {
         return alert("NO!")
@@ -26,14 +26,14 @@ async function registerFormSubmitHandler(e: any, values: RegisterType, setState:
         values.email = ""
         values.password = ""
         values.repassword = ""
-
+        navigate("/")
     } catch (error) {
         console.log("err")
         console.log(error)
     }
 }
 
-async function loginFormSubmitHandler(e: any, values: LoginType, setState: any) {
+async function loginFormSubmitHandler(e: any, values: LoginType, setState: any, navigate: Function) {
     e.preventDefault();
 
     try {
@@ -43,6 +43,7 @@ async function loginFormSubmitHandler(e: any, values: LoginType, setState: any) 
         setState(result)
         localStorage.setItem("auth", JSON.stringify(result))
         console.log(result)
+        navigate("/")
     } catch (error) {
         console.log(error)
     }
@@ -55,7 +56,7 @@ function changeHandler(e: any, setFormValues: any) {
     }));
 };
 
-async function createFormSubmitHandler(e: any, values: CreateType) {
+async function createFormSubmitHandler(e: any, values: CreateType, navigate: Function) {
     e.preventDefault();
     if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
         return alert("NO!");
@@ -81,12 +82,13 @@ async function createFormSubmitHandler(e: any, values: CreateType) {
         const response = await requester("http://localhost:1337/create", "POST", true, values)
         const result = await response.json();
         console.log(result)
+        navigate("/dashboard")
     } catch (error) {
         console.log(error)
     }
 }
 
-async function editFormSubmitHandler(e: any, values: CreateType) {
+async function editFormSubmitHandler(e: any, values: CreateType, navigate: Function) {
     e.preventDefault();
     if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
         return alert("NO!");
@@ -109,6 +111,7 @@ async function editFormSubmitHandler(e: any, values: CreateType) {
         const response = await requester("http://localhost:1337/edit", "POST", true, values)
         const result = await response.json();
         console.log(result)
+        navigate("/dashboard")
     } catch (error) {
         alert(error)
     }
@@ -126,11 +129,12 @@ async function searchSubmitHandler(e: any, brand: string, setShoes: Function) {
     }
 }
 
-async function deleteHandler(shoeId: any) {
+async function deleteHandler(shoeId: any, navigate: Function) {
     try {
         const response = await requester(`http://localhost:1337/delete/${shoeId}`, "DELETE")
         const result = await response.json()
         console.log(result)
+        navigate("/")
     } catch (error) {
         alert(error)
     }

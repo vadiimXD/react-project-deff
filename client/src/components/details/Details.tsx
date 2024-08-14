@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Details.css"
 import { useEffect, useState } from "react";
 import requester from "../../utils/requester";
@@ -7,6 +7,8 @@ import { AuthType } from "../../types/AuthType";
 import { deleteHandler } from "../../utils/formUtils";
 
 export default function Details() {
+    const navigate = useNavigate()
+
     const [shoe, setShoe] = useState<ShoeType>()
     const params = useParams();
     const stringAuth: any = localStorage.getItem("auth");
@@ -49,7 +51,7 @@ export default function Details() {
                     <Link to={`/edit/${shoe._id}`} id="edit-btn">
                         Edit
                     </Link>
-                    <a  onClick={()=>deleteHandler(shoe._id)} id="delete-btn">
+                    <a  onClick={()=>deleteHandler(shoe._id,navigate)} id="delete-btn">
                         Delete
                     </a>
                 </div>) : <></>}
