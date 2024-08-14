@@ -1,4 +1,6 @@
-.buttons{}
+.buttons{
+    display: flex;
+}
 
 .images {
     max-width: 150px;

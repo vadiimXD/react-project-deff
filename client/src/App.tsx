@@ -13,7 +13,7 @@ import { AuthContextProvider } from './contexts/AuthContext'
 import Edit from './components/edit/Edit'
 import Profile from './components/profile/Profile'
 import AuthGuard from './guards/authGuard'
-
+import LoggedGuard from './guards/loggedGuard'
 
 export default function App() {
 
@@ -22,16 +22,22 @@ export default function App() {
       <Header />
       <Routes>
         <Route path='/' element={<MainContent />}></Route>
-        <Route path='/register' element={<Register />}></Route>
-        <Route path='/login' element={<Login />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/search' element={<Search />}></Route>
-        <Route element={<AuthGuard />}>
-        <Route path='/create' element={<Create />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
         <Route path='/details/:shoeId' element={<Details />}></Route>
-        <Route path='/edit/:shoeId' element={<Edit />}></Route>
+
+        <Route element={<LoggedGuard />}>
+          <Route path='/register' element={<Register />}></Route>
+          <Route path='/login' element={<Login />}></Route>
         </Route>
+
+        <Route element={<AuthGuard />}>
+          <Route path='/edit/:shoeId' element={<Edit />}></Route>
+          <Route path='/create' element={<Create />}></Route>
+          <Route path='/profile' element={<Profile />}></Route>
+        </Route>
+
+        <Route path='*' element={<MainContent />}></Route>
       </Routes>
       <Footer />
     </AuthContextProvider>

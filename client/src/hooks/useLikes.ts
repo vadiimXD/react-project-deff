@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import requester from "../utils/requester";
 import { getUser } from "../utils/authUtil";
+import { AuthType } from "../types/AuthType";
 
 export function useLikes(initialValue: any, shoeId: string) {
     const [likes, setLikes] = useState(initialValue)
-    const user = getUser()
+    const user:AuthType = getUser()
 
     useEffect(() => {
         (async () => {

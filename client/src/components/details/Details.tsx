@@ -48,10 +48,10 @@ export default function Details() {
                     </p>
                 </div>
                 {auth?.userId == shoe?.owner ? (<div id="action-buttons">
-                    <Link to={`/edit/${shoe._id}`} id="edit-btn">
+                    <Link to={`/edit/${shoe?._id}`} id="edit-btn">
                         Edit
                     </Link>
-                    <a  onClick={()=>deleteHandler(shoe._id,navigate)} id="delete-btn">
+                    <a  onClick={()=>deleteHandler(shoe?._id,navigate)} id="delete-btn">
                         Delete
                     </a>
                 </div>) : <></>}

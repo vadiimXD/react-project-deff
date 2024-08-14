@@ -24,7 +24,7 @@ export default function Header() {
                             <a onClick={() => {
                                 context?.setState(false)
                                 localStorage.clear()
-                                navigate("/")
+                                navigate("/login")
                             }}>Logout</a>
                         </div>
                     ) : (

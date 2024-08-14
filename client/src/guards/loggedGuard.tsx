@@ -1,10 +1,10 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { getUser } from "../utils/authUtil";
 
-export default function AuthGuard() {
+export default function LoggedGuard() {
     const isAuthenticated = getUser()
     return (
-        isAuthenticated ? <Outlet /> : <Navigate to={"/login"} />
+        isAuthenticated ? <Navigate to={"/"} /> : <Outlet/>
     );
 }
 
