@@ -1,22 +1,12 @@
-import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { useAuth } from "../../hooks/useAuth"
+import { useContext } from "react"
+import { AuthType } from "../../types/AuthType"
 import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Header() {
-    const context = useContext(AuthContext)
-    const [isLogged, setIsLogged] = useState({})
-    const authStringify: any = localStorage.getItem("auth")
-    const auth = JSON.parse(authStringify)
-
-    useEffect(() => {
-        if (!auth) {
-            return setIsLogged(auth)
-        }
-
-        setIsLogged({})
-
-    }, [context])
-
+    const context: AuthType | undefined = useContext(AuthContext)
+    const [isLogged, setIsLogged] = useAuth({})
     return (
         <>
             <header>

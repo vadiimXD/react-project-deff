@@ -101,7 +101,6 @@ router.post("/like", async (req, res) => {
 
 router.post("/unlike", async (req, res) => {
     try {
-        
         const shoe = await shoeService.removeLike(req.body.userId, req.body.shoeId)
         console.log(shoe.likes)
         res.json(shoe.likes)

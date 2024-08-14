@@ -1,45 +1,55 @@
 import { useEffect, useState } from "react";
 import requester from "../utils/requester";
-
+import { getUser } from "../utils/authUtil";
 
 export function useLikes(initialValue: any, shoeId: string) {
     const [likes, setLikes] = useState(initialValue)
-    const userStringify: any = localStorage.getItem("auth")
-    const user = JSON.parse(userStringify)
+    const user = getUser()
 
     useEffect(() => {
         (async () => {
+            try {
 
-            const response = await requester(`http://localhost:1337/likes/${shoeId}`, "GET")
-            const result = await response.json();
+                const response = await requester(`http://localhost:1337/likes/${shoeId}`, "GET")
+                const result = await response.json();
 
-            setLikes(result)
+                setLikes(result)
+            } catch (error) {
+                alert(error)
+            }
         })()
 
     }, [])
 
     async function addLike(shoeId: string) {
-        console.log(shoeId)
+        console.log("heloo?")
+        try {
+            const response = await requester("http://localhost:1337/like", "POST", true, { shoeId, userId: user.userId })
+            const result = await response.json();
+            setLikes(result)
 
-        const response = await requester("http://localhost:1337/like", "POST", true, { shoeId, userId: user.userId })
-        const result = await response.json();
-        setLikes(result)
+        } catch (error) {
+            alert(error)
+        }
     }
 
     async function removeLike(shoeId: string) {
-        console.log(shoeId)
-
-        const response = await requester("http://localhost:1337/unlike", "POST", true, { shoeId, userId: user.userId })
-        const result = await response.json();
-        setLikes(result)
+        console.log("here")
+        try {
+            const response = await requester("http://localhost:1337/unlike", "POST", true, { shoeId, userId: user.userId })
+            const result = await response.json();
+            setLikes(result)
+        } catch (error) {
+            alert(error)
+        }
     }
-
 
     return [
         likes,
         setLikes,
         addLike,
-        removeLike
+        removeLike,
+        user,
     ]
 }
 
