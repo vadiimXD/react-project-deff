@@ -60,14 +60,4 @@ exports.loginUser = async (body) => {
 
 exports.updateProfile = (userId, body) => { return User.findByIdAndUpdate(userId, body) }
 
-exports.addToCart = async (userId, phoneId) => {
-    await User.findByIdAndUpdate(userId, { $push: { shoppingCart: phoneId } })
-    return Phone.findByIdAndUpdate(phoneId, { $push: { shoppingCart: userId } })
-}
-
-exports.removeFromCart = async (userId, phoneId) => {
-    await Phone.findByIdAndUpdate(phoneId, { $pull: { shoppingCart: userId } })
-    return User.findByIdAndUpdate(userId, { $pull: { shoppingCart: phoneId } })
-
-}
 

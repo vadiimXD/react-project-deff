@@ -1,7 +1,10 @@
+import "./Card.css"
+
 import { Link } from "react-router-dom";
+import { useLikes } from "../../hooks/useLikes";
 
 export default function Card(props: any) {
-    
+    const [likes, setLikes, addLike] = useLikes([], props.shoe._id)
     return (
         <li className="card">
             <img src={props.shoe.imageUrl} alt="no img" />
@@ -17,8 +20,20 @@ export default function Card(props: any) {
                 <strong>Value:</strong>
                 <span className="value">{props.shoe.price}$</span>
             </p>
-            <Link to={`/details/${props.shoe._id}`} className="details-btn" >Details</Link>
-            <Link to={`/details/${props.shoe._id}`} className="details-btn" >Like</Link>
+
+            <div className="buttons">
+                <Link to={`/details/${props.shoe._id}`} className="details-btn" >Details</Link>
+
+                {likes.length == 0 ? <button className="details-btn" onClick={() => addLike(props.shoe._id)} >Like</button> : <button className="details-btn" >Unlike</button>}
+
+            </div>
+
+            <div className="likes">
+                <p>{likes.length}</p>
+                <span className="material-symbols-outlined">
+                    thumb_up
+                </span>
+            </div>
         </li>
     );
 }

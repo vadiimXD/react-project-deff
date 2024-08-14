@@ -1,6 +1,6 @@
 import { ShoeType } from "./ShoeType"
 
-export type Profile = {
+export type ProfileType = {
     _id: string
     email: string
     password: string

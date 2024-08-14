@@ -12,18 +12,20 @@ exports.getOneProduct = (productId) => Shoe.findById(productId);
 
 exports.deleteProduct = (productId) => Shoe.findByIdAndDelete(productId);
 
+exports.addLike = async (userId, shoeId) => {
+    await Shoe.findByIdAndUpdate(shoeId, { $push: { likes: userId } })
+
+    return await this.getOneProduct(shoeId)
+}
+
+
+exports.removeLike = (userId, shoeId) => Shoe.findByIdAndUpdate(shoeId, { $pull: { likes: userId } })
+
 exports.createOffer = async (body) => {
     await Shoe.create(body)
     const product = await Shoe.findOne({ model: body.model })
     await User.findByIdAndUpdate(body.owner, { $push: { addedShoes: product._id } })
     return product
-}
-
-exports.buyProduct = async (productId, userId) => {
-    await User.findByIdAndUpdate(userId, { $push: { boughtList: productId } })
-    const phone = await Shoe.findById(productId);
-    phone.boughtFrom = userId;
-    await Shoe.findByIdAndUpdate(productId, phone)
 }
 
 exports.searchProducts = async (brand) => {

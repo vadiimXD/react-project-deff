@@ -28,18 +28,14 @@ const ShoeSchema = new mongoose.Schema({
         required: true,
         min: 0
     },
-    // shoppingCart: [{
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "Phone"
-    // }],
-    // boughtFrom: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "User"
-    // },
     owner: {
         type: mongoose.Types.ObjectId,
         ref: "User"
-    }
+    },
+    likes: [{
+        type: mongoose.Types.ObjectId,
+        ref: "User"
+    }],
 })
 
 

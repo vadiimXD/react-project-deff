@@ -46,13 +46,14 @@ router.get("/details/:shoeId", async (req, res) => {
     }
 })
 
+
 router.post("/buy", async (req, res) => {
     try {
         await phonesService.buyProduct(req.body.phoneId, req.body.userId)
         res.send(true)
     } catch (error) {
         res.send(error.message)
-
+        
     }
 })
 
@@ -72,7 +73,7 @@ router.delete("/delete/:shoeId", async (req, res) => {
         res.send({ deleted: true })
     } catch (error) {
         res.send(error.message)
-
+        
     }
 })
 
@@ -87,7 +88,23 @@ router.post("/search", async (req, res) => {
     }
 })
 
+router.post("/like", async (req, res) => {
+    try {
+        
+        const shoe = await shoeService.addLike(req.body.userId, req.body.shoeId)
+        console.log(shoe.likes)
+        res.json(shoe.likes)
+    } catch (error) {
+        res.send(error.message)
+    }
+})
 
-
-
+router.get("/likes/:shoeId", async (req, res) => {
+    try {
+        const shoe = await shoeService.getOneProduct(req.params.shoeId);
+        res.json(shoe.likes)
+    } catch (error) {
+        res.send(error.message)
+    }
+})
 module.exports = router
