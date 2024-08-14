@@ -26,10 +26,20 @@ export function useLikes(initialValue: any, shoeId: string) {
         setLikes(result)
     }
 
+    async function removeLike(shoeId: string) {
+        console.log(shoeId)
+
+        const response = await requester("http://localhost:1337/unlike", "POST", true, { shoeId, userId: user.userId })
+        const result = await response.json();
+        setLikes(result)
+    }
+
+
     return [
         likes,
         setLikes,
-        addLike
+        addLike,
+        removeLike
     ]
 }
 

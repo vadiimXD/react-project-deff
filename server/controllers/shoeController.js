@@ -99,6 +99,17 @@ router.post("/like", async (req, res) => {
     }
 })
 
+router.post("/unlike", async (req, res) => {
+    try {
+        
+        const shoe = await shoeService.removeLike(req.body.userId, req.body.shoeId)
+        console.log(shoe.likes)
+        res.json(shoe.likes)
+    } catch (error) {
+        res.send(error.message)
+    }
+})
+
 router.get("/likes/:shoeId", async (req, res) => {
     try {
         const shoe = await shoeService.getOneProduct(req.params.shoeId);
@@ -107,4 +118,6 @@ router.get("/likes/:shoeId", async (req, res) => {
         res.send(error.message)
     }
 })
+
+
 module.exports = router

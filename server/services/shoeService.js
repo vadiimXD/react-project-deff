@@ -18,8 +18,12 @@ exports.addLike = async (userId, shoeId) => {
     return await this.getOneProduct(shoeId)
 }
 
+exports.removeLike = async (userId, shoeId) => {
+    await Shoe.findByIdAndUpdate(shoeId, { $pull: { likes: userId } })
 
-exports.removeLike = (userId, shoeId) => Shoe.findByIdAndUpdate(shoeId, { $pull: { likes: userId } })
+    return await this.getOneProduct(shoeId)
+
+}
 
 exports.createOffer = async (body) => {
     await Shoe.create(body)
