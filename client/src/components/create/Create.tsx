@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom"
 
 export default function Create() {
     const navigate = useNavigate()
+    const [error, setError] = useState(false)
+
     let [createFormValues, setCreateForm] = useState({
         brand: "",
         model: "",
@@ -16,9 +18,11 @@ export default function Create() {
 
     return (
         <section id="create">
+            {error ? <p id="error">{error}</p> : <></>}
+
             <div className="form">
                 <h2>Add shoes</h2>
-                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues,navigate)}>
+                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues,navigate,setError)}>
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
                         <input

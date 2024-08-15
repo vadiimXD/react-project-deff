@@ -6,7 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Register() {
     const navigate = useNavigate()
-
+    const [error, setError] = useState(false)
     const [registerFormValues, setRegisterFormValues] = useState({
         email: '',
         password: '',
@@ -17,9 +17,10 @@ export default function Register() {
 
     return (
         <section id="register">
+            {error ? <p id="error">{error}</p> : <></>}
             <div className="form">
                 <h2>Register</h2>
-                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState, navigate)}>
+                <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState, navigate, setError)}>
                     <div>
                         <label htmlFor="register-email">Email:</label>
                         <input type="text" name="email" id="register-email" placeholder="vladii@abv.bg" value={registerFormValues.email}

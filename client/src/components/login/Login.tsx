@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Login() {
     const navigate = useNavigate()
+    const [error, setError] = useState(false)
     let [loginFormValues, setLoginFormValues] = useState({
         email: "",
         password: ""
@@ -15,9 +16,11 @@ export default function Login() {
 
     return (
         <section id="login">
+            {error ? <p id="error">{error}</p> : <></>}
+
             <div className="form">
                 <h2>Login</h2>
-                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState,navigate)}>
+                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState, navigate,setError)}>
                     <div>
                         <label htmlFor="email">Email:</label>
                         <input

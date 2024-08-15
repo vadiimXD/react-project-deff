@@ -1,7 +1,6 @@
 const Shoe = require("../models/Shoe")
 const User = require("../models/User")
 
-
 exports.getAllShoes = () => Shoe.find();
 
 exports.getLastShoes = () => Shoe.find().sort({ _id: -1 }).limit(3);

@@ -1,10 +1,26 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+#error {
+  background-color: rgb(204, 43, 43);
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 2em;
+  max-width: 10em;
+  max-height: 1.5em;
+  border-radius: 6px;
+  font-size: inherit;
+  color: rgb(230, 230, 230);
+}
+
 .register-page {
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
+
 .form {
   background: #ffffff;
   max-width: 460px;
@@ -37,6 +53,7 @@
   font-size: 14px;
   text-align: center;
 }
+
 .form textarea {
   border: 1px solid rgb(206, 206, 206);
   width: 90%;
@@ -46,6 +63,7 @@
   margin-bottom: 10px;
   background-color: rgb(242, 242, 242);
 }
+
 .form button {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -62,6 +80,7 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
 .form button:hover,
 .form button:active,
 .form button:focus {
@@ -74,6 +93,7 @@
   max-width: 300px;
   margin: 0 auto;
 }
+
 .container:before,
 .container:after {
   content: "";
@@ -86,15 +106,16 @@
   color: #b3b3b3;
   font-size: 17px;
 }
+
 .form .message a {
   color: #535353;
   text-decoration: none;
 }
 
-label{
-    color: black;
-    display: flex;
+label {
+  color: black;
+  display: flex;
   justify-content: center;
   padding-bottom: 1em;
-    
+
 }

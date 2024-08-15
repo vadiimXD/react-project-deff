@@ -8,25 +8,27 @@ import requester from "../../utils/requester"
 export default function Search() {
     const [shoes, setShoes] = useState<ShoeType[] | []>([])
     const [brand, setBrand] = useState({ brand: "" })
+    const [error, setError] = useState<boolean | string>(false)
 
     useEffect(() => {
         (async () => {
             try {
-
                 const response = await requester("http://localhost:1337/catalog", "GET")
                 const result: ShoeType[] = await response.json();
 
                 setShoes(result)
             } catch (error) {
-                alert(error)
+                setError("An error occurred while executing the request!")
             }
         })()
     }, [])
-    
+
     return (
         <section id="search">
+            {error ? <p id="error">{error}</p> : <></>}
+
             <h2>Search by Brand</h2>
-            <form className="search-wrapper cf" onSubmit={(e) => searchSubmitHandler(e, brand.brand, setShoes)}>
+            <form className="search-wrapper cf" onSubmit={(e) => searchSubmitHandler(e, brand.brand, setShoes, setError)}>
                 <input
                     id="#search-input"
                     type="text"

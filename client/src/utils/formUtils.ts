@@ -5,15 +5,21 @@ import { RegisterType } from "../types/RegisterType";
 import requester from "./requester";
 import { AuthType } from "../types/AuthType";
 
-async function registerFormSubmitHandler(e: any, values: RegisterType, setState: any, navigate: Function) {
-    e.preventDefault()
-    if (!values.email || !values.password || !values.repassword) {
-        return alert("NO!")
-    }
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const imageRegex = /^https?:\/\//
 
-    if (values.password != values.repassword) {
-        return alert("NO!")
-    }
+async function registerFormSubmitHandler(e: any, values: RegisterType, setState: any, navigate: Function, setError: Function) {
+    e.preventDefault()
+    if (!values.email || !values.password || !values.repassword) return setError("Empty fields")
+
+    if (!emailRegex.test(values.email)) return setError("Invalid Email")
+
+
+    if (values.password.length < 3) return setError("Minimum password length is 3!")
+
+    if (values.password != values.repassword) return setError("Passwords do not match!")
+
+    if (values.password.length < 3) return setError("Minimum re-password length is 3!")
 
     try {
 
@@ -22,19 +28,21 @@ async function registerFormSubmitHandler(e: any, values: RegisterType, setState:
         const result = await response.json()
         setState(result)
         localStorage.setItem("auth", JSON.stringify(result))
-        console.log(result)
-        values.email = ""
-        values.password = ""
-        values.repassword = ""
+        console.log(result, "result")
         navigate("/")
     } catch (error) {
-        console.log("err")
-        console.log(error)
+        setError("An error occurred while executing the request!")
     }
 }
 
-async function loginFormSubmitHandler(e: any, values: LoginType, setState: any, navigate: Function) {
+async function loginFormSubmitHandler(e: any, values: LoginType, setState: any, navigate: Function, setError: Function) {
     e.preventDefault();
+
+    if (!values.email || !values.password) return setError("Empty fields")
+
+    if (!emailRegex.test(values.email)) return setError("Invalid Email")
+
+    if (values.password.length < 3) return setError("Minimum password length is 3!")
 
     try {
         const response = await requester("http://localhost:1337/login", "POST", true, { email: values.email, password: values.password })
@@ -45,7 +53,7 @@ async function loginFormSubmitHandler(e: any, values: LoginType, setState: any, 
         console.log(result)
         navigate("/")
     } catch (error) {
-        console.log(error)
+        setError("An error occurred while executing the request!")
     }
 }
 
@@ -56,24 +64,19 @@ function changeHandler(e: any, setFormValues: any) {
     }));
 };
 
-async function createFormSubmitHandler(e: any, values: CreateType, navigate: Function) {
+async function createFormSubmitHandler(e: any, values: CreateType, navigate: Function, setError: Function) {
     e.preventDefault();
-    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
-        return alert("NO!");
-    }
 
-    if (values.brand.length < 3) {
-        return alert("noo");
-    }
+    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) return setError("Empty fields!");
 
-    if (values.model.length < 2) {
-        return alert("no");
-    }
+    if (!imageRegex.test(values.imageUrl)) return setError("Invalid image url!")
 
+    if (values.brand.length < 3) return setError("Minimum brand length is 3!")
 
-    if (Number(values.price) < 0) {
-        return alert("no!");
-    }
+    if (values.model.length < 2) return setError("Minimum model length is 2!")
+
+    if (Number(values.price) < 0) return setError("Invalid price!")
+
     const stringAuth: any = localStorage.getItem("auth");
     const auth: AuthType = JSON.parse(stringAuth)
     values.owner = auth.userId
@@ -84,28 +87,22 @@ async function createFormSubmitHandler(e: any, values: CreateType, navigate: Fun
         console.log(result)
         navigate("/dashboard")
     } catch (error) {
-        console.log(error)
+        setError("An error occurred while executing the request!")
     }
 }
 
-async function editFormSubmitHandler(e: any, values: CreateType, navigate: Function) {
+async function editFormSubmitHandler(e: any, values: CreateType, navigate: Function, setError: Function) {
     e.preventDefault();
-    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) {
-        return alert("NO!");
-    }
 
-    if (values.brand.length < 3) {
-        return alert("noo");
-    }
+    if (!values.brand || !values.imageUrl || !values.model || !values.price || !values.release) return setError("Empty fields!");
 
-    if (values.model.length < 2) {
-        return alert("no");
-    }
+    if (!imageRegex.test(values.imageUrl)) return setError("Invalid image url!")
 
+    if (values.brand.length < 3) return setError("Minimum brand length is 3!")
 
-    if (Number(values.price) < 0) {
-        return alert("no!");
-    }
+    if (values.model.length < 2) return setError("Minimum model length is 2!")
+
+    if (Number(values.price) < 0) return setError("Invalid price!")
 
     try {
         const response = await requester("http://localhost:1337/edit", "POST", true, values)
@@ -113,11 +110,11 @@ async function editFormSubmitHandler(e: any, values: CreateType, navigate: Funct
         console.log(result)
         navigate("/dashboard")
     } catch (error) {
-        alert(error)
+        setError("An error occurred while executing the request!")
     }
 }
 
-async function searchSubmitHandler(e: any, brand: string, setShoes: Function) {
+async function searchSubmitHandler(e: any, brand: string, setShoes: Function, setError: Function) {
     e.preventDefault()
     console.log(brand)
     try {
@@ -125,18 +122,19 @@ async function searchSubmitHandler(e: any, brand: string, setShoes: Function) {
         const result = await response.json()
         setShoes(result)
     } catch (error) {
-        alert(error)
+        setError("An error occurred while executing the request!")
     }
 }
 
-async function deleteHandler(shoeId: any, navigate: Function) {
+async function deleteHandler(shoeId: any, navigate: Function, setError: Function) {
     try {
         const response = await requester(`http://localhost:1337/delete/${shoeId}`, "DELETE")
         const result = await response.json()
         console.log(result)
         navigate("/")
     } catch (error) {
-        alert(error)
+        setError("An error occurred while executing the request!")
+
     }
 }
 

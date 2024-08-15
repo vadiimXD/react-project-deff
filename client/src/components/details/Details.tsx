@@ -13,6 +13,7 @@ export default function Details() {
     const params = useParams();
     const stringAuth: any = localStorage.getItem("auth");
     const auth: AuthType = JSON.parse(stringAuth)
+    const [error, setError] = useState<boolean | string>(false)
 
     useEffect(() => {
         (async () => {
@@ -21,13 +22,15 @@ export default function Details() {
                 const result = await response.json();
                 setShoe(result)
             } catch (error) {
-                alert(error)
+                setError("An error occurred while executing the request!")
             }
         })()
     }, [])
 
     return (
         <section id="details">
+            {error ? <p id="error">{error}</p> : <></>}
+
             <div id="details-wrapper">
                 <p id="details-title">Shoe Details</p>
                 <div id="img-wrapper">
@@ -48,7 +51,7 @@ export default function Details() {
                     </p>
                 </div>
                 {auth?.userId == shoe?.owner ? (<div id="action-buttons">
-                    <Link to={`/edit/${shoe?._id}`} id="edit-btn">
+                    <Link to={`/edit/${shoe?._id}/${shoe?.owner}`} id="edit-btn">
                         Edit
                     </Link>
                     <a  onClick={()=>deleteHandler(shoe?._id,navigate)} id="delete-btn">

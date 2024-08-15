@@ -14,6 +14,7 @@ import Edit from './components/edit/Edit'
 import Profile from './components/profile/Profile'
 import AuthGuard from './guards/authGuard'
 import LoggedGuard from './guards/loggedGuard'
+import OwnerGuard from './guards/ownerGuard'
 
 export default function App() {
 
@@ -31,8 +32,9 @@ export default function App() {
           <Route path='/login' element={<Login />}></Route>
         </Route>
 
+        <Route path='/edit/:shoeId/:ownerId' element={<OwnerGuard> <Edit /> </OwnerGuard>}></Route>
+
         <Route element={<AuthGuard />}>
-          <Route path='/edit/:shoeId' element={<Edit />}></Route>
           <Route path='/create' element={<Create />}></Route>
           <Route path='/profile' element={<Profile />}></Route>
         </Route>
