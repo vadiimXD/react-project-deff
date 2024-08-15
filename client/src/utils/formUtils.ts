@@ -1,4 +1,3 @@
-import { json, useNavigate } from "react-router-dom";
 import { CreateType } from "../types/CreateType";
 import { LoginType } from "../types/LoginType";
 import { RegisterType } from "../types/RegisterType";

@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import "./Edit.css"
+import { useEffect, useState } from "react";
 import requester from "../../utils/requester";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { changeHandler, editFormSubmitHandler } from "../../utils/formUtils";
-import { getUser } from "../../utils/authUtil";
-import { AuthType } from "../../types/AuthType";
+
 
 export default function Edit() {
     const navigate = useNavigate()
@@ -47,7 +46,7 @@ export default function Edit() {
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
                         <span className="material-symbols-outlined" id="black">
-                        steps
+                            steps
                         </span>
                         <input
                             type="text"
@@ -61,7 +60,7 @@ export default function Edit() {
                     <div>
                         <label htmlFor="shoe-model">Shoe model:</label>
                         <span className="material-symbols-outlined" id="black">
-                        steps
+                            steps
                         </span>
                         <input
                             type="text"
@@ -77,7 +76,7 @@ export default function Edit() {
                     <div>
                         <label htmlFor="shoe-img">Shoe image:</label>
                         <span className="material-symbols-outlined" id="black">
-                        image
+                            image
                         </span>
                         <input
                             type="text"
@@ -93,7 +92,7 @@ export default function Edit() {
                     <div>
                         <label htmlFor="shoe-release">Release date:</label>
                         <span className="material-symbols-outlined" id="black">
-                        calendar_month
+                            calendar_month
                         </span>
                         <input
                             type="date"
@@ -111,7 +110,7 @@ export default function Edit() {
                     <div>
                         <label htmlFor="shoe-price">Shoe price:</label>
                         <span className="material-symbols-outlined" id="black">
-                        attach_money
+                            attach_money
                         </span>
                         <input
                             type="number"

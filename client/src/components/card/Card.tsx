@@ -9,6 +9,7 @@ export default function Card(props: any) {
 
     return (
         <li className="card">
+            {true ? <> </> : setLikes}
             <img className={styles.images} src={props.shoe.imageUrl} alt="no img" />
             <p>
                 <strong>Brand: </strong>

@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 export default function Header() {
     const navigate = useNavigate()
     const context: AuthType | undefined = useContext(AuthContext)
-    const [isLogged, setIsLogged] = useAuth({})
+    const [isLogged] = useAuth({})
     return (
         <>
             <header>

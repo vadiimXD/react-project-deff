@@ -18,7 +18,7 @@ export default function Dashboard() {
 
                 setShoes(result)
             } catch (error) {
-                alert(error)
+                setError("An error occurred while executing the request!")
             }
         })()
     }, [])
