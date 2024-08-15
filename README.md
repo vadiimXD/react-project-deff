@@ -17,3 +17,21 @@ for Back-End i used express and mongodb for database.
 1.First need to download all packages with `npm i` (in Back-End folder). 
 
 2.To start Back-End server need to type in terminal or cli `npm start`.
+
+## Front-End
+This Front-End was created with [ReactJS](https://github.com/facebook/react).
+
+
+### How to start Front-End server?
+1.First need to download all packages with `npm i` (in Front-End folder).
+
+2.To start Front-End server need to type in terminal or cli `npm run dev`.
+
+## Photos of project
+
+![image](https://github.com/user-attachments/assets/88681069-f813-410a-afba-d94255489551)
+
+![image](https://github.com/user-attachments/assets/bdac4f06-6a3e-49ce-a6f1-25c8b8741b31)
+
+![image](https://github.com/user-attachments/assets/4b1bf015-e67d-4c37-92f1-11fba76ed19f)
+
