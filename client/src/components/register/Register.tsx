@@ -23,11 +23,17 @@ export default function Register() {
                 <form className="reigster-form" onSubmit={(e) => registerFormSubmitHandler(e, registerFormValues, context?.setState, navigate, setError)}>
                     <div>
                         <label htmlFor="register-email">Email:</label>
+                        <span className="material-symbols-outlined" id="black">
+                            alternate_email
+                        </span>
                         <input type="text" name="email" id="register-email" placeholder="vladii@abv.bg" value={registerFormValues.email}
                             onChange={(e) => changeHandler(e, setRegisterFormValues)} />
                     </div>
                     <div>
                         <label htmlFor="register-password">Password: </label>
+                        <span className="material-symbols-outlined" id="black">
+                            password
+                        </span>
                         <input
                             type="password"
                             name="password"
@@ -39,6 +45,9 @@ export default function Register() {
                     </div>
                     <div>
                         <label htmlFor="repeat-password">Repeat password:</label>
+                        <span className="material-symbols-outlined" id="black">
+                            password
+                        </span>
                         <input
                             type="password"
                             name="repassword"

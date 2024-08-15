@@ -1,12 +1,27 @@
 footer {
-    background-color: #7d7e7e;
-    color: white;
-    font-weight: bolder;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 30px;
-  }
+  background: #100049;
+
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+}
+
+footer p {
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover{
+  cursor: pointer;
+  color: rgb(214, 214, 214);
+}

@@ -3,9 +3,12 @@ import { useState, useEffect } from "react"
 import { ShoeType } from "../../types/ShoeType"
 import requester from "../../utils/requester"
 import Card from "../card/Card"
+import { Link } from "react-router-dom"
+import { AuthType } from "../../types/AuthType"
+import { getUser } from "../../utils/authUtil"
 
 export default function MainContent() {
-
+    const user: AuthType = getUser()
     let [shoes, setShoes] = useState<ShoeType[]>([])
 
     useEffect(() => {
@@ -35,8 +38,19 @@ export default function MainContent() {
                         </ul>
                     </>
                 ) : (<img src="https://d1nymbkeomeoqg.cloudfront.net/photos/28/53/406870_3175_XL.jpg" alt="no img" />)}
-                <h2>Find your collectible shoes</h2>
-                <h3>Add SHOES</h3>
+                {user ?
+                    <>
+                        <h2>  <Link to={"/search"}>Find your collectible shoes</Link></h2>
+                        <h3>  <Link to={"/create"}>Add shoes</Link></h3>
+                    </>
+                    :
+                    <>
+                        <h2>  <Link to={"/register"}>Register</Link></h2>
+                        <h3>  <Link to={"/login"}>Login</Link></h3>
+                    </>
+
+                }
+
 
             </section>
         </>

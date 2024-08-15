@@ -99,6 +99,10 @@ label {
 
 }
 
+.form input:hover {
+    background-color: #dadada;
+}
+
 #error {
     background-color: rgb(204, 43, 43);
     padding: 1em;
@@ -112,4 +116,8 @@ label {
     border-radius: 6px;
     font-size: inherit;
     color: rgb(230, 230, 230);
+}
+
+#black {
+    color: black;
 }

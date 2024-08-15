@@ -20,9 +20,12 @@ export default function Login() {
 
             <div className="form">
                 <h2>Login</h2>
-                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState, navigate,setError)}>
+                <form className="login-form" onSubmit={(e) => loginFormSubmitHandler(e, loginFormValues, context?.setState, navigate, setError)}>
                     <div>
                         <label htmlFor="email">Email:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        alternate_email
+                        </span>
                         <input
                             type="text"
                             name="email"
@@ -35,6 +38,9 @@ export default function Login() {
 
                     <div>
                         <label htmlFor="password">Password:</label>
+                        <span className="material-symbols-outlined" id="black">
+                            password
+                        </span>
                         <input
                             type="password"
                             name="password"

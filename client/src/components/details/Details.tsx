@@ -54,7 +54,7 @@ export default function Details() {
                     <Link to={`/edit/${shoe?._id}/${shoe?.owner}`} id="edit-btn">
                         Edit
                     </Link>
-                    <a  onClick={()=>deleteHandler(shoe?._id,navigate)} id="delete-btn">
+                    <a  onClick={()=>deleteHandler(shoe?._id,navigate,setError)} id="delete-btn">
                         Delete
                     </a>
                 </div>) : <></>}

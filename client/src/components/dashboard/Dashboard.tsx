@@ -5,6 +5,7 @@ import requester from "../../utils/requester"
 import { ShoeType } from "../../types/ShoeType"
 
 export default function Dashboard() {
+    const [error, setError] = useState<boolean | string>(false)
 
     let [shoes, setShoes] = useState<ShoeType[]>([])
 
@@ -24,6 +25,8 @@ export default function Dashboard() {
 
     return (
         <section id="dashboard">
+            {error ? <p id="error">{error}</p> : <></>}
+
             <h2>Collectibles</h2>
 
             {shoes.length != 0 ? (<ul className="card-wrapper">

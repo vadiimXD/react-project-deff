@@ -115,10 +115,11 @@ h2 {
   
   header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0.3em 3em;
-    background: #7d7e7e;
+    background: #100049;
+    padding: 1.5em;
   }
   
   nav {
@@ -140,7 +141,7 @@ h2 {
   }
   
   nav a {
-    font-size: 1.5rem;
+    font-size: 2rem;
     color: #0a0a0a;
     font-weight: 400;
   }
@@ -159,5 +160,4 @@ h2 {
   section {
     margin-bottom: 100px;
   }
-  
   

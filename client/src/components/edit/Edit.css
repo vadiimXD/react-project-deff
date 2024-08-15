@@ -115,3 +115,7 @@ label {
   font-size: inherit;
   color: rgb(230, 230, 230);
 }
+
+#black {
+  color: black;
+}

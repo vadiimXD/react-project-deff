@@ -22,9 +22,12 @@ export default function Create() {
 
             <div className="form">
                 <h2>Add shoes</h2>
-                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues,navigate,setError)}>
+                <form className="create-form" onSubmit={(e) => createFormSubmitHandler(e, createFormValues, navigate, setError)}>
                     <div>
                         <label htmlFor="shoe-brand">Shoe brand:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        steps
+                        </span>
                         <input
                             type="text"
                             name="brand"
@@ -36,6 +39,9 @@ export default function Create() {
                     </div>
                     <div>
                         <label htmlFor="shoe-model">Shoe model:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        steps
+                        </span>
                         <input
                             type="text"
                             name="model"
@@ -49,6 +55,9 @@ export default function Create() {
 
                     <div>
                         <label htmlFor="shoe-img">Shoe image:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        image
+                        </span>
                         <input
                             type="text"
                             name="imageUrl"
@@ -62,6 +71,9 @@ export default function Create() {
 
                     <div>
                         <label htmlFor="shoe-release">Release date:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        calendar_month
+                        </span>
                         <input
                             type="date"
                             name="release"
@@ -77,6 +89,9 @@ export default function Create() {
 
                     <div>
                         <label htmlFor="shoe-price">Shoe price:</label>
+                        <span className="material-symbols-outlined" id="black">
+                        attach_money
+                        </span>
                         <input
                             type="number"
                             name="price"

@@ -51,6 +51,12 @@
     text-align: center;
     color: white;
     background: #7c7e7e;
+
+  }
+
+  .details-btn:hover{
+    cursor: pointer;
+    background-color: #5a5a5a;
   }
   
   .card p {

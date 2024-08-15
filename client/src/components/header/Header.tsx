@@ -11,35 +11,56 @@ export default function Header() {
     return (
         <>
             <header>
-
-                <Link id="logo" to="/"
-                ><img id="logo-img" src="https://cdn-icons-png.flaticon.com/512/1138/1138598.png" alt="no img"
-                    /></Link>
                 <nav>
 
                     {!!isLogged ? (
                         <div className="user">
-                            <Link to="/profile">Profile</Link>
-                            <Link to="/create">Add Pair</Link>
-                            <a onClick={() => {
-                                context?.setState(false)
-                                localStorage.clear()
-                                navigate("/login")
-                            }}>Logout</a>
+                            <span className="material-symbols-outlined sized">
+                                <Link to="/profile">person</Link>
+                            </span>
+
+                            <span className="material-symbols-outlined sized">
+                                <Link to="/create">add_circle</Link>
+                            </span>
+
+                            <span className="material-symbols-outlined sized">
+                                <a onClick={() => {
+                                    context?.setState(false)
+                                    localStorage.clear()
+                                    navigate("/login")
+                                }}>exit_to_app</a>
+                            </span>
+
                         </div>
                     ) : (
                         <div className="guest">
-                            <Link to="/login">Login</Link>
-                            <Link to="/register">Register</Link>
+
+                            <span className="material-symbols-outlined sized">
+                                <Link to="/login">login</Link>
+                            </span>
+
+                            <span className="material-symbols-outlined sized">
+                                <Link to="/register">app_registration</Link>
+                            </span>
                         </div>
                     )}
                     <div>
-                        <Link to="/dashboard">Dashboard</Link>
-                        <Link to="/search">Search</Link>
+
+                        <span className="material-symbols-outlined sized">
+                            <Link to="/dashboard">dashboard</Link>
+                        </span>
+
+                        <span className="material-symbols-outlined sized">
+                            <Link to="/">home</Link>
+                        </span>
+
+                        <span className="material-symbols-outlined" id="sized">
+                            <Link to="/search">search</Link>
+                        </span>
                     </div>
 
                 </nav>
-            </header>
+            </header >
         </>
     )
 }
